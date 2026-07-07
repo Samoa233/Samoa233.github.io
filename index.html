@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samoa-HeroX WebSite Test</title>
+    <style>
+        /* 基础重置 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #ffffff;
+            padding: 60px 80px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部 */
+        header h1 { font-size: 4rem; font-weight: bold; color: #000; }
+        header hr {
+            border: none;
+            border-top: 1px solid #dcdcdc;
+            margin: 20px 0 40px 0;
+            width: 100%;
+        }
+
+        /* 中间 */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .text-content { font-size: 1.8rem; color: #000; }
+        .text-content span { font-weight: bold; color: #333; }
+
+        /* 右侧系统 Emoji 样式 */
+        .emoji-face {
+            /* 直接设置字体大小，系统会自动渲染彩色的原生表情 */
+            font-size: 150px; 
+            line-height: 1;
+            flex-shrink: 0;
+            user-select: none; /* 防止被鼠标选中 */
+        }
+
+        /* 底部 */
+        footer {
+            margin-top: auto;
+            font-size: 1rem;
+            color: #666;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Hello World!</h1>
+        <hr>
+    </header>
+
+    <main>
+        <div class="text-content">
+            现在你正在使用 <span id="browser-info">加载内核版本中...</span> 访问此网站
+        </div>
+        
+        <!-- 直接调用系统 Emoji，无需任何图片资源 -->
+        <div class="emoji-face">😲</div>
+    </main>
+
+    <footer>
+        Samoa-HeroX WebSite Test
+    </footer>
+
+    <script>
+        function getBrowserName() {
+            const ua = navigator.userAgent;
+            if (ua.indexOf("Firefox") > -1) return "Firefox";
+            if (ua.indexOf("SamsungBrowser") > -1) return "Samsung Internet";
+            if (ua.indexOf("Opera") > -1 || ua.indexOf("OPR") > -1) return "Opera";
+            if (ua.indexOf("Trident") > -1) return "Internet Explorer";
+            if (ua.indexOf("Edge") > -1) return "Microsoft Edge";
+            if (ua.indexOf("Chrome") > -1) return "Chrome";
+            if (ua.indexOf("Safari") > -1) return "Safari";
+            return "未知浏览器";
+        }
+        document.getElementById('browser-info').innerText = getBrowserName();
+    </script>
+</body>
+</html>
