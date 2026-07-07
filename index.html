@@ -5,25 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Samoa-HeroX WebSite Test</title>
     <style>
-    /* 1. 引入 HarmonyOS Sans 字体 (使用 TTF) */
+    /* 1. 声明本地引入 HarmonyOS Sans SC (TTF) */
     @font-face {
-        font-family: 'HarmonyOS Sans';
-        src: url('./HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
+        font-family: 'HarmonyOS Sans SC';
+        src: url('HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
     }
     @font-face {
-        font-family: 'HarmonyOS Sans';
-        src: url('./HarmonyOS_Sans_SC_Bold.ttf') format('truetype');
+        font-family: 'HarmonyOS Sans SC';
+        src: url('HarmonyOS_Sans_SC_Bold.ttf') format('truetype');
         font-weight: bold;
         font-style: normal;
     }
-    
-    /* 2. 基础重置并应用到全局 */
+
+    /* 2. 基础重置 */
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* 3. 全局应用 HarmonyOS Sans SC */
     body {
-        /* 这里用上我们新引入的字体 */
-        font-family: 'HarmonyOS Sans', -apple-system, sans-serif; 
+        font-family: 'HarmonyOS Sans SC', sans-serif; 
         background-color: #ffffff;
         padding: 60px 80px;
         height: 100vh;
@@ -31,7 +32,7 @@
         flex-direction: column;
     }
 
-    /* 下面保留你原有的布局代码 */
+    /* 4. 顶部样式 */
     header h1 { font-size: 4rem; font-weight: bold; color: #000; }
     header hr {
         border: none;
@@ -39,6 +40,8 @@
         margin: 20px 0 40px 0;
         width: 100%;
     }
+
+    /* 5. 中间布局 */
     main {
         flex: 1;
         display: flex;
@@ -53,6 +56,8 @@
         flex-shrink: 0;
         user-select: none;
     }
+
+    /* 6. 底部页脚 */
     footer {
         margin-top: auto;
         font-size: 1rem;
@@ -60,6 +65,7 @@
         letter-spacing: 0.5px;
     }
 </style>
+
 </head>
 <body>
 
