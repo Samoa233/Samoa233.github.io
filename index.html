@@ -74,6 +74,43 @@
         color: #666;
         letter-spacing: 0.5px;
     }
+    
+    /* ========================================= */
+/* 👇 针对手机屏幕（宽度小于 600px 时生效） */
+/* ========================================= */
+@media screen and (max-width: 600px) {
+    
+    /* 1. 手机端四周留白减少 */
+    body {
+        padding: 20px 20px; 
+    }
+
+    /* 2. 手机端标题缩小（4rem 在手机上太大了） */
+    header h1 {
+        font-size: 2.8rem;
+    }
+
+    /* 3. 主力布局改成“上下排列”并居中 */
+    main {
+        flex-direction: column; /* 强制变成上下排列 */
+        justify-content: center;
+        gap: 40px; /* 文字和图片之间留点空隙 */
+    }
+
+    /* 4. 手机端文字缩小并居中 */
+    .text-content {
+        font-size: 1.3rem;
+        text-align: center; /* 让文字居中，显得对称 */
+        line-height: 1.5;   /* 增加行高，避免换行后字挤在一起 */
+    }
+
+    /* 5. 手机端图片变大并居中 */
+    .main-image {
+        max-width: 70%;     /* 让图片变宽，占屏幕宽度的70% */
+        max-height: none;   /* 取消高度限制 */
+        margin: 0 auto;     /* 让图片水平居中 */
+    }
+}
 </style>
 
 </head>
