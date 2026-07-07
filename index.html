@@ -55,7 +55,14 @@
         justify-content: space-between;
         align-items: center;
     }
-    .text-content { font-size: 1.8rem; color: #000; }
+ .text-content {
+        font-size: 1.8rem;
+        color: #000;
+        display: flex;           /* 开启弹性盒子 */
+        flex-direction: column;  /* 【关键】强制图标在上、文字在下 */
+        align-items: flex-start; /* 保持左对齐 */
+    }
+    
     .text-content span { font-weight: bold; color: #333; }
         /* 新加的图片样式，确保图片大小适中且不变形 */
     .main-image {
@@ -110,7 +117,59 @@
         max-height: none;   /* 取消高度限制 */
         margin: 0 auto;     /* 让图片水平居中 */
     }
+
+        /* 浏览器图标样式 */
+        /* 替换为这个强限制的版本 */
+        /* 浏览器图标样式 */
+    .browser-icon {
+        display: block;
+        margin: 0 auto 15px auto; /* 居中对齐，底部留空隙 */
+        flex-shrink: 0;
+    }
+    }
+
+    /* ========================================= */
+    /* 👇 针对手机屏幕（宽度小于 600px 时生效） */
+    /* ========================================= */
+    @media screen and (max-width: 600px) {
+        /* 手机端四周留白减少 */
+        body { padding: 20px 20px; }
+        
+        /* 手机端标题缩小 */
+        header h1 { font-size: 2.8rem; }
+        
+        /* 主力布局改成“上下排列” */
+        main {
+            flex-direction: column;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        /* 手机端文字缩小、居中 */
+        .text-content {
+            font-size: 1.3rem;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        /* 手机端图片变大居中 */
+        .main-image {
+            max-width: 70%;
+            max-height: none;
+            margin: 0 auto;
+        }
+
+            /* 手机端浏览器图标尺寸重锁 */
+    .browser-icon {
+        margin: 0 auto 10px auto;
+        width: 45px !important;
+        max-width: 45px !important;
+        height: 45px !important;
+        max-height: 45px !important;
+        object-fit: contain !important;
+    }
 }
+
 </style>
 
 </head>
@@ -122,9 +181,12 @@
     </header>
 
     <main>
-        <div class="text-content">
-            现在你正在使用 <span id="browser-info">加载内核版本中...</span> 访问此网站
-        </div>
+       <div class="text-content">
+    <!-- 这里是留给 SVG 图标的位置 -->
+    <div id="browser-icon-container"></div>
+    
+    <p>现在你正在使用 <span id="browser-info">加载内核版本中...</span> 访问此网站</p>
+</div>
         
         <img src="test.webp" alt="测试图片" class="main-image" loading="lazy">
     </main>
@@ -133,19 +195,58 @@
         Samoa-HeroX WebSite Test
     </footer>
 
-    <script>
-        function getBrowserName() {
-            const ua = navigator.userAgent;
-            if (ua.indexOf("Firefox") > -1) return "Firefox";
-            if (ua.indexOf("SamsungBrowser") > -1) return "Samsung Internet";
-            if (ua.indexOf("Opera") > -1 || ua.indexOf("OPR") > -1) return "Opera";
-            if (ua.indexOf("Trident") > -1) return "Internet Explorer";
-            if (ua.indexOf("Edge") > -1) return "Microsoft Edge";
-            if (ua.indexOf("Chrome") > -1) return "Chrome";
-            if (ua.indexOf("Safari") > -1) return "Safari";
-            return "未知浏览器";
+        <script>
+    function detectBrowserAndShowIcon() {
+        const ua = navigator.userAgent;
+        let browserName = "未知浏览器";
+
+        // 1. 检测浏览器名称（注意：Edge 的检测必须要在 Chrome 的前面）
+        if (ua.indexOf("Firefox") > -1) browserName = "Firefox";
+        else if (ua.indexOf("SamsungBrowser") > -1) browserName = "Samsung Internet";
+        else if (ua.indexOf("Opera") > -1 || ua.indexOf("OPR") > -1) browserName = "Opera";
+        else if (ua.indexOf("Trident") > -1) browserName = "Internet Explorer";
+        else if (ua.indexOf("Edg") > -1) browserName = "Microsoft Edge"; // 优先识别 Edge
+        else if (ua.indexOf("Chrome") > -1) browserName = "Chrome";
+        else if (ua.indexOf("Safari") > -1) browserName = "Safari";
+
+        // 2. 将名称映射到你根目录的 SVG 文件名
+        const iconMap = {
+            "Chrome": "chrome.svg",
+            "Firefox": "firefox.svg",
+            "Microsoft Edge": "microsoft-edge.svg",
+            "Safari": "safari.svg",
+            "Internet Explorer": "internet-explorer.svg",
+            "Opera": "opera.svg",
+            "Samsung Internet": "samsung-internet.svg"
+        };
+
+        // 3. 更新页面上的文字
+        document.getElementById('browser-info').innerText = browserName;
+
+        // 4. 动态把 SVG 图片插入到文字上方
+        const iconContainer = document.getElementById('browser-icon-container');
+        iconContainer.innerHTML = ''; // 先清空以防万一
+
+        const iconFile = iconMap[browserName];
+        if (iconFile) {
+            const img = document.createElement('img');
+            img.src = iconFile;
+            img.alt = browserName + " icon";
+            img.className = "browser-icon";
+
+            // 🔥 强制锁定尺寸的强力内联锁
+            img.style.width = "60px";
+            img.style.maxWidth = "60px";
+            img.style.height = "60px";
+            img.style.maxHeight = "60px";
+            img.style.objectFit = "contain";
+            
+            iconContainer.appendChild(img);
         }
-        document.getElementById('browser-info').innerText = getBrowserName();
-    </script>
+    }
+
+    // 执行函数
+        detectBrowserAndShowIcon();
+</script>
 </body>
 </html>
