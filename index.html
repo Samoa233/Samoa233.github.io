@@ -5,26 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Samoa-HeroX WebSite Test</title>
     <style>
-    /* 1. 声明本地引入 HarmonyOS Sans SC (TTF) */
+    /* 1. 直接使用本地真正的 .woff2 字体 */
     @font-face {
-        font-family: 'HarmonyOS Sans SC';
-        src: url('HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
+        font-family: 'HarmonyOS Sans';
+        src: url('HarmonyOS_Sans_Regular.woff2') format('woff2');
         font-weight: normal;
         font-style: normal;
     }
     @font-face {
-        font-family: 'HarmonyOS Sans SC';
-        src: url('HarmonyOS_Sans_SC_Bold.ttf') format('truetype');
+        font-family: 'HarmonyOS Sans';
+        src: url('HarmonyOS_Sans_Bold.woff2') format('woff2');
         font-weight: bold;
         font-style: normal;
     }
 
     /* 2. 基础重置 */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    /* 3. 全局应用 HarmonyOS Sans SC */
     body {
-        font-family: 'HarmonyOS Sans SC', sans-serif; 
+        font-family: 'HarmonyOS Sans', sans-serif; 
+        background-color: #ffffff;
+        padding: 60px 80px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    /* 下面的 header, main, footer 布局代码原封不动保留即可 */
+    body {
+        font-family: 'HarmonyOS Sans', sans-serif; 
         background-color: #ffffff;
         padding: 60px 80px;
         height: 100vh;
